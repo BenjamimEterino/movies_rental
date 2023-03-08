@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 import { IcreateUsersDTO } from "../../dtos/ICreateUsersDTO";
 import { IUsersRepo } from "../../repositories/IUsersRepo";
+import { hash } from "bcrypt";
 
 @injectable()
 class CreateUserUseCase {
@@ -16,10 +17,12 @@ class CreateUserUseCase {
       throw new Error("User existe");
     }
 
+    const passwordHash = await hash(password, 8);
+
     const user = await this.userRepo.create({
         email,
         name,
-        password
+        password: passwordHash
     })
 
     return user;
