@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/bin/node /usr/bin/yarn add @type/bcrypt -D
+  /usr/bin/node /usr/bin/yarn add jasonwebtoken
 
 PATH: 
-  /home/benjamim/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/benjamim/Android/Sdk/emulator:/home/benjamim/Android/Sdk/platform-tools:/home/benjamim/Android/Sdk/emulator:/home/benjamim/Android/Sdk/platform-tools
+  /home/benjamim/.local/bin:/home/benjamim/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/benjamim/Android/Sdk/emulator:/home/benjamim/Android/Sdk/platform-tools:/home/benjamim/Android/Sdk/emulator:/home/benjamim/Android/Sdk/platform-tools
 
 Yarn version: 
   1.22.19
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@type%2fbcrypt: Not found
+  Error: https://registry.yarnpkg.com/jasonwebtoken: Not found
       at Request.params.callback [as _callback] (/usr/lib/node_modules/yarn/lib/cli.js:66145:18)
       at Request.self.callback (/usr/lib/node_modules/yarn/lib/cli.js:140890:22)
       at Request.emit (node:events:513:28)
@@ -34,7 +34,10 @@ npm manifest:
     "license": "MIT",
     "dependencies": {
       "bcrypt": "^5.1.0",
-      "express": "^4.18.2"
+      "express": "^4.18.2",
+      "express-async-errors": "^3.1.1",
+      "reflect-metadata": "^0.1.13",
+      "tsyringe": "^4.7.0"
     },
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
@@ -42,6 +45,7 @@ npm manifest:
     },
     "devDependencies": {
       "@prisma/client": "^4.11.0",
+      "@types/bcrypt": "^5.0.0",
       "@types/express": "^4.17.17",
       "prisma": "^4.11.0",
       "ts-node-dev": "^2.0.0",
@@ -133,6 +137,13 @@ Lockfile:
     version "1.0.3"
     resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.3.tgz#472eaab5f15c1ffdd7f8628bd4c4f753995ec79e"
     integrity sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==
+  
+  "@types/bcrypt@^5.0.0":
+    version "5.0.0"
+    resolved "https://registry.yarnpkg.com/@types/bcrypt/-/bcrypt-5.0.0.tgz#a835afa2882d165aff5690893db314eaa98b9f20"
+    integrity sha512-agtcFKaruL8TmcvqbndlqHPSJgsolhf/qPWchFlgnW1gECTN/nKbFcoFnvKAQRFfKbh+BO6A3SWdJu9t+xF3Lw==
+    dependencies:
+      "@types/node" "*"
   
   "@types/body-parser@*":
     version "1.19.2"
@@ -473,6 +484,11 @@ Lockfile:
     version "1.8.1"
     resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
     integrity sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==
+  
+  express-async-errors@^3.1.1:
+    version "3.1.1"
+    resolved "https://registry.yarnpkg.com/express-async-errors/-/express-async-errors-3.1.1.tgz#6053236d61d21ddef4892d6bd1d736889fc9da41"
+    integrity sha512-h6aK1da4tpqWSbyCa3FxB/V6Ehd4EEB15zyQq9qe75OZBp0krinNKuH4rAY+S/U/2I36vdLAUFSjQJ+TFmODng==
   
   express@^4.18.2:
     version "4.18.2"
@@ -947,6 +963,11 @@ Lockfile:
     dependencies:
       picomatch "^2.2.1"
   
+  reflect-metadata@^0.1.13:
+    version "0.1.13"
+    resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
+    integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
+  
   resolve@^1.0.0:
     version "1.22.1"
     resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.22.1.tgz#27cb2ebb53f91abb49470a928bba7558066ac177"
@@ -1179,6 +1200,18 @@ Lockfile:
       "@types/strip-json-comments" "0.0.30"
       strip-bom "^3.0.0"
       strip-json-comments "^2.0.0"
+  
+  tslib@^1.9.3:
+    version "1.14.1"
+    resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
+    integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
+  
+  tsyringe@^4.7.0:
+    version "4.7.0"
+    resolved "https://registry.yarnpkg.com/tsyringe/-/tsyringe-4.7.0.tgz#aea0a9d565385deebb6def60cda342b15016f283"
+    integrity sha512-ncFDM1jTLsok4ejMvSW5jN1VGPQD48y2tfAR0pdptWRKYX4bkbqPt92k7KJ5RFJ1KV36JEs/+TMh7I6OUgj74g==
+    dependencies:
+      tslib "^1.9.3"
   
   type-is@~1.6.18:
     version "1.6.18"
