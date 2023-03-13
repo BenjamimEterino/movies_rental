@@ -3,6 +3,11 @@ import { IGenresRepo } from "../IGenreRepo";
 import { Genre } from ".prisma/client";
 
 class GenreRepo implements IGenresRepo {
+  async list(): Promise<Genre[]> {
+    const genres = prismaClient.genre.findMany();
+
+    return genres;
+  }
   async findByName(name: string): Promise<Genre> {
     const genre = await prismaClient.genre.findFirst({
       where: { name },
