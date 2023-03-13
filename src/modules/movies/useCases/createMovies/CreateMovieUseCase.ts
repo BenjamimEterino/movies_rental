@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
-import { ICreateMovieDTO } from "../dtos/ICreateMovieDTO";
-import { IMoveisRepo } from "../repos/IMoviesRepo";
-import { IGenresRepo } from "../../genres/repos/IGenreRepo";
-import { AppError } from "../../../errors/AppError";
+import { ICreateMovieDTO } from "../../dtos/ICreateMovieDTO";
+import { IMoveisRepo } from "../../repos/IMoviesRepo";
+import { IGenresRepo } from "../../../genres/repos/IGenreRepo";
+import { AppError } from "../../../../errors/AppError";
 
 @injectable()
 class CreateMoviesUseCase {
