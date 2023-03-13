@@ -4,11 +4,19 @@ import { IcreateUsersDTO } from "../../dtos/ICreateUsersDTO";
 import { IUsersRepo } from "../IUsersRepo";
 
 class UsersRepo implements IUsersRepo {
+    async findById(id: string) {
+        const user = await prismaClient.user.findFirst({
+            where: {id}
+        })
+    
+        return user as User
+     
+    }
  
  async create({ name, email, password }: IcreateUsersDTO): Promise<User> {
     const user = await prismaClient.user.create({
         data: {
-            name,
+            name,  
             email,
             password,
             isAdmin: false
