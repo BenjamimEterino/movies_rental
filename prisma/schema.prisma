@@ -19,7 +19,26 @@ model User {
 }
 
 model Genre {
-    id String @id @default(uuid())
-    name String
+    id         String   @id @default(uuid())
+    name       String
     created_at DateTime @default(now())
+
+    movies Movie[]
+
+    @@map("genres")
+}
+
+model Movie {
+    id          String   @id @default(uuid())
+    name        String
+    description String
+    daily_rate  Float
+    fine_amount Float
+    available   Boolean
+    genre_id    String
+    created_at  DateTime @default(now())
+
+    genre Genre @relation(fields: [genre_id], references: [id])
+
+    @@map("movies")
 }
