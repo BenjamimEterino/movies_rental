@@ -42,6 +42,16 @@ class MoviesRepo implements IMoveisRepo {
 
     return movie;
   }
+  async findByUnvailableById(id: string): Promise<Movie> {
+    const movieUnavailable = await prismaClient.movie.findFirst({
+      where: {
+        id,
+        available: false
+      }
+    })
+
+    return movieUnavailable as Movie
+  }
 }
 
 export { MoviesRepo };

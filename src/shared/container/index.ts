@@ -5,6 +5,8 @@ import { IGenresRepo } from "../../modules/genres/repos/IGenreRepo";
 import { GenreRepo } from "../../modules/genres/repos/implementations/GenresRepo";
 import { IMoveisRepo } from "../../modules/movies/repos/IMoviesRepo";
 import { MoviesRepo } from "../../modules/movies/repos/implementations/MoviesRepos";
+import { IRentalsRepo } from "../../modules/rentals/repos/IRentalsRepo";
+import { RentalsRepo } from "../../modules/rentals/repos/implementations/RentalsRepo";
 
 
 container.registerSingleton<IUsersRepo>(
@@ -20,4 +22,9 @@ container.registerSingleton<IGenresRepo>(
 container.registerSingleton<IMoveisRepo>(
     "MoviesRepo",
     MoviesRepo
+)
+
+container.registerSingleton<IRentalsRepo>(
+    "RentalsRepo",
+    RentalsRepo
 )

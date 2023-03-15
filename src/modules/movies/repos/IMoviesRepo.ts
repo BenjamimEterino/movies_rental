@@ -6,6 +6,7 @@ interface IRequest {
     genre_id?: string;
 }
 interface IMoveisRepo {
+    findByUnvailableById(id: string): Promise<Movie>;
     create({name, description, daily_rate, fine_amount, genre_id}: ICreateMovieDTO): Promise<Movie>
     list({name, genre_id}: IRequest): Promise<Movie[]>
 }

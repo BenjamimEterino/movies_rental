@@ -15,6 +15,8 @@ model User {
     isAdmin    Boolean
     created_at DateTime @default(now())
 
+    rentals Rental[]
+
     @@map("users")
 }
 
@@ -38,7 +40,24 @@ model Movie {
     genre_id    String
     created_at  DateTime @default(now())
 
+    rentals Rental[]
+
     genre Genre @relation(fields: [genre_id], references: [id])
 
     @@map("movies")
+}
+
+model Rental {
+    id              String    @id @default(uuid())
+    user_id         String
+    movie_id       String
+    start_at        DateTime  @default(now())
+    end_at          DateTime?
+    expected_return DateTime
+    total           Float?
+
+    user  User  @relation(fields: [user_id], references: [id])
+    movie Movie @relation(fields: [movie_id], references: [id])
+
+    @@map("rentals")
 }
