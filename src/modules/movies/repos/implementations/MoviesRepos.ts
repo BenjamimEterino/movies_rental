@@ -12,7 +12,9 @@ class MoviesRepo implements IMoveisRepo {
     });
 
     if (name) {
-      const movies = availableMovies.filter((movie) => movie.name.includes(name));
+      const movies = availableMovies.filter((movie) =>
+        movie.name.includes(name)
+      );
       return movies;
     } else if (genre_id) {
       const movies = availableMovies.filter(
@@ -46,11 +48,18 @@ class MoviesRepo implements IMoveisRepo {
     const movieUnavailable = await prismaClient.movie.findFirst({
       where: {
         id,
-        available: false
-      }
-    })
+        available: false,
+      },
+    });
 
-    return movieUnavailable as Movie
+    return movieUnavailable as Movie;
+  }
+
+  async updateAvailable(id: string, available: boolean): Promise<void> {
+    await prismaClient.movie.update({
+      where: { id },
+      data: { available },
+    });
   }
 }
 

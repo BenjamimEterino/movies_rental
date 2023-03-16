@@ -4,6 +4,7 @@ import { ICreateRentalsDTO } from "../../dtos/IcreateRentalsDTO";
 import { IRentalsRepo } from "../IRentalsRepo";
 
 class RentalsRepo implements IRentalsRepo{
+    
     async   create({ user_id, movie_id, expected_return }: ICreateRentalsDTO): Promise<Rental> {
        const rental = await prismaClient.rental.create({
         data: {
@@ -26,6 +27,7 @@ class RentalsRepo implements IRentalsRepo{
 
         return openRental as Rental;
     }
+
 
 }
 

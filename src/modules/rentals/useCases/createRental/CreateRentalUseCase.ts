@@ -48,6 +48,8 @@ async execute({user_id, movie_id, expected_return}: ICreateRentalsDTO){
         expected_return
     })
 
+    await this.moviesRepo.updateAvailable(movie_id, false);
+
     return rental;
 }
 }
