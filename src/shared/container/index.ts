@@ -7,6 +7,8 @@ import { IMoveisRepo } from "../../modules/movies/repos/IMoviesRepo";
 import { MoviesRepo } from "../../modules/movies/repos/implementations/MoviesRepos";
 import { IRentalsRepo } from "../../modules/rentals/repos/IRentalsRepo";
 import { RentalsRepo } from "../../modules/rentals/repos/implementations/RentalsRepo";
+import { IDateProvider } from "./providers/IDateProvider";
+import { DayjsDateProvider } from "./providers/implementations/DayjsDateProvider";
 
 
 container.registerSingleton<IUsersRepo>(
@@ -28,3 +30,9 @@ container.registerSingleton<IRentalsRepo>(
     "RentalsRepo",
     RentalsRepo
 )
+
+container.registerSingleton<IDateProvider>(
+    "DayjsDateProvider",
+    DayjsDateProvider
+  );
+  

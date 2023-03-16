@@ -3,16 +3,20 @@ import { IRentalsRepo } from "../../repos/IRentalsRepo";
 import { IMoveisRepo } from "../../../movies/repos/IMoviesRepo";
 import { ICreateRentalsDTO } from "../../dtos/IcreateRentalsDTO";
 import { AppError } from "../../../../errors/AppError";
+import { IDateProvider } from "../../../../shared/container/providers/IDateProvider";
 
 @injectable()
 class CreateRentalUseCase {
-constructor(
-@inject("RentalsRepo")
-private rentalsRepo: IRentalsRepo
+    constructor(
+    @inject("RentalsRepo")
+    private rentalsRepo: IRentalsRepo,
 
-@inject("IMoviesRepo")
-private moviesRepo: IMoveisRepo
-){}
+    @inject("MoviesRepo")
+    private moviesRepo: IMoveisRepo,
+
+    @inject("DayjsDateProvider")
+    private dateProvider: IDateProvider
+    ){}
 
 async execute({user_id, movie_id, expected_return}: ICreateRentalsDTO){
     const minHours = 24;
@@ -28,6 +32,23 @@ async execute({user_id, movie_id, expected_return}: ICreateRentalsDTO){
     if(movieUnavailable) {
         throw new AppError("Movie Unavailable");
     }
+
+    const compareHours = this.dateProvider.compareInHours(
+        this.dateProvider.dateNow(),
+        expected_return
+    )
+
+    if(compareHours < minHours) {
+        throw new AppError("Invalid time!")
+    }
+
+    const rental = await this.rentalsRepo.create({
+        user_id,
+        movie_id,
+        expected_return
+    })
+
+    return rental;
 }
 }
 
